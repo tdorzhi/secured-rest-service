@@ -1,10 +1,10 @@
 package jp.co.soramitsu.sora.bca.exceptions;
 
-import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.authentication.BadCredentialsException;
 
-public class IncorrectCredentialsException extends Exception{
+public class IncorrectCredentialsException extends BadCredentialsException {
 
-  public IncorrectCredentialsException(UserDetails userDetails) {
-    super("Credentials for given user " + userDetails.getUsername() + " are incorrect");
+  public IncorrectCredentialsException(String username) {
+    super("Credentials for given user " + username + " are incorrect");
   }
 }

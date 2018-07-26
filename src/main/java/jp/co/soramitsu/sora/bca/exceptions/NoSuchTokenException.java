@@ -1,8 +1,10 @@
 package jp.co.soramitsu.sora.bca.exceptions;
 
-public class NoSuchTokenException extends IllegalStateException{
+import org.springframework.security.authentication.BadCredentialsException;
+
+public class NoSuchTokenException extends BadCredentialsException {
 
   public NoSuchTokenException(String token) {
-    super("Token " + token + " is invalid, authentication required");
+    super("User with " + token + " is not found");
   }
 }

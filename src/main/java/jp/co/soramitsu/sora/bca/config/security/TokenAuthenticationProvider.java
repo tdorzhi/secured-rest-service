@@ -2,6 +2,7 @@ package jp.co.soramitsu.sora.bca.config.security;
 
 import static java.util.Optional.ofNullable;
 
+import jp.co.soramitsu.sora.bca.domain.entities.User;
 import jp.co.soramitsu.sora.bca.exceptions.NoSuchTokenException;
 import jp.co.soramitsu.sora.bca.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,11 +15,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class TokenAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-  private UserService<UserDetails> userDetailsService;
+  private UserService<User> userDetailsService;
 
   @Autowired
-  public TokenAuthenticationProvider(UserService<UserDetails> userDetailsService) {
-    this.userDetailsService = userDetailsService;
+  public TokenAuthenticationProvider(UserService<User> userService) {
+    this.userDetailsService = userService;
   }
 
   @Override

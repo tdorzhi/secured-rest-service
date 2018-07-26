@@ -1,6 +1,8 @@
 package jp.co.soramitsu.sora.bca.exceptions;
 
-public class NoSuchUserException extends Exception{
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+
+public class NoSuchUserException extends UsernameNotFoundException {
 
   public NoSuchUserException(String username) {
     super("User with username " + username + " not found");

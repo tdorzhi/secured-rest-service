@@ -24,7 +24,6 @@ public class User implements UserDetails, Serializable {
   @NaturalId
   private String username;
   private String password;
-  private String salt;
   private boolean isActive;
 
   /**
@@ -47,7 +46,7 @@ public class User implements UserDetails, Serializable {
 
   @Override
   public boolean isAccountNonExpired() {
-    return isActive;
+    return true;
   }
 
   @Override

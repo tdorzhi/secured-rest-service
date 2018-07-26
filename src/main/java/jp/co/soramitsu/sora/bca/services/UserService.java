@@ -12,7 +12,7 @@ public interface UserService<T extends UserDetails> extends UserDetailsService {
    *
    * @param username username
    * @param password hashed password
-   * @return String temporary token
+   * @return String short living JWT token
    * */
   String login(String username, String password) throws NoSuchUserException;
 
@@ -25,9 +25,9 @@ public interface UserService<T extends UserDetails> extends UserDetailsService {
   Optional<T> findByToken(String token);
 
   /**
-   * Log out given user (invalidate if there is any, linked token)
+   * Log out given user from token, basically invalidate token
    *
-   * @param user to log out
+   * @param token bound to user
    * */
-  void logout(T user);
+  void logout(String token);
 }
