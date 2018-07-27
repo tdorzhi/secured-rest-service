@@ -1,0 +1,24 @@
+POST http://localhost:8080/public/users/login?username=dorzhi&password=123123
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-07-27T035422.200.json
+
+###
+
+POST http://localhost:8080/public/users/register?username=dorzhi&password=123123
+Accept: */*
+Cache-Control: no-cache
+
+<> 2018-07-27T040048.200.json
+
+###
+
+GET http://localhost:8080/users/logout
+Accept: */*
+Cache-Control: no-cache
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkb3J6aGkiLCJleHAiOjE1MzI2OTg1NTIsImlhdCI6MTUzMjY5ODM3Mn0.zOPh6S5nDbqWxJFdTmgDdBONJ9pgCsi8nnGTr1zaVbo
+
+<> 2018-07-27T035846.406.json
+
+###

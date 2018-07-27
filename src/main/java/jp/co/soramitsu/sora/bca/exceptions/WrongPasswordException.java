@@ -4,10 +4,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-@ResponseStatus(HttpStatus.UNAUTHORIZED)
-public class NoSuchTokenException extends BadCredentialsException {
+@ResponseStatus(HttpStatus.OK)
+public class WrongPasswordException extends BadCredentialsException {
 
-  public NoSuchTokenException(String token) {
-    super("User with " + token + " is not found");
+  public WrongPasswordException(String username) {
+    super("Password for given user " + username + " is incorrect");
   }
 }

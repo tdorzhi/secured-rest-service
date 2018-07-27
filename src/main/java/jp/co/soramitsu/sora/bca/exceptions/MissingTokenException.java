@@ -5,9 +5,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(HttpStatus.UNAUTHORIZED)
-public class NoSuchTokenException extends BadCredentialsException {
+public class MissingTokenException extends BadCredentialsException {
 
-  public NoSuchTokenException(String token) {
-    super("User with " + token + " is not found");
+  public MissingTokenException() {
+    super("Missing token header!");
   }
 }

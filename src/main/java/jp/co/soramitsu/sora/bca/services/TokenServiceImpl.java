@@ -19,7 +19,7 @@ public class TokenServiceImpl implements TokenService{
   @Autowired
   public TokenServiceImpl(SecurityProperties properties) {
     if (properties.getJwt().getSecret() == null) {
-      throw new IllegalStateException("Properties do not include secret for signing JWT tokens!");
+      throw new IllegalStateException("Properties must contain secret for signing JWT tokens!");
     }
     this.algo =  Algorithm.HMAC256(properties.getJwt().getSecret());
     this.jwtVerifier = JWT.require(algo).build();
@@ -40,6 +40,7 @@ public class TokenServiceImpl implements TokenService{
    * only limited time which is no longer than {{@link #tokenExpiresIn}}
    * */
   private Cache<String, Object> blacklist;
+
   /**
    * Blacklist's implementation {@link Cache} doesn't allow null for values
    * This dummy object will be used instead

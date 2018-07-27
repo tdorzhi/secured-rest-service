@@ -12,9 +12,6 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface UserRepository extends JpaRepository<User, UUID> {
 
-//  @Query("select u from User u where u.enabled = true and u.username = :username")
-  Optional<OnlyPassword> passwordByUsername(@Param("username") String username);
-
   Optional<User> findByUsername(String username);
 
 }

@@ -4,7 +4,7 @@ import static java.util.Optional.ofNullable;
 
 import jp.co.soramitsu.sora.bca.domain.entities.User;
 import jp.co.soramitsu.sora.bca.exceptions.NoSuchTokenException;
-import jp.co.soramitsu.sora.bca.services.UserService;
+import jp.co.soramitsu.sora.bca.services.UserAuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.AbstractUserDetailsAuthenticationProvider;
@@ -12,14 +12,17 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+/**
+ *  Only responsibility is to authenticate user by given token
+ * */
 @Service
 public class TokenAuthenticationProvider extends AbstractUserDetailsAuthenticationProvider {
 
-  private UserService<User> userDetailsService;
+  private UserAuthService<User> userDetailsService;
 
   @Autowired
-  public TokenAuthenticationProvider(UserService<User> userService) {
-    this.userDetailsService = userService;
+  public TokenAuthenticationProvider(UserAuthService<User> userAuthService) {
+    this.userDetailsService = userAuthService;
   }
 
   @Override

@@ -5,7 +5,7 @@ import jp.co.soramitsu.sora.bca.exceptions.NoSuchUserException;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
-public interface UserService<T extends UserDetails> extends UserDetailsService {
+public interface UserAuthService<T extends UserDetails> extends UserDetailsService {
 
   /**
    * Log in with given username and password
@@ -30,4 +30,6 @@ public interface UserService<T extends UserDetails> extends UserDetailsService {
    * @param token bound to user
    * */
   void logout(String token);
+
+
 }

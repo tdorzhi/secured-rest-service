@@ -6,6 +6,7 @@ import java.util.UUID;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import jp.co.soramitsu.sora.bca.utils.AuthoritiesOf;
 import lombok.Data;
 import org.hibernate.annotations.NaturalId;
@@ -30,6 +31,7 @@ public class User implements UserDetails, Serializable {
    * For initial implementation we don't want complex domain, so the granted authorities
    * */
   @Override
+  @Transient
   public Collection<? extends GrantedAuthority> getAuthorities() {
     return AuthoritiesOf.user();
   }
@@ -45,21 +47,25 @@ public class User implements UserDetails, Serializable {
   }
 
   @Override
+  @Transient
   public boolean isAccountNonExpired() {
     return true;
   }
 
   @Override
+  @Transient
   public boolean isAccountNonLocked() {
     return true;
   }
 
   @Override
+  @Transient
   public boolean isCredentialsNonExpired() {
     return true;
   }
 
   @Override
+  @Transient
   public boolean isEnabled() {
     return isActive;
   }

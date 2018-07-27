@@ -6,7 +6,7 @@ import static org.springframework.util.StringUtils.isEmpty;
 import java.util.Optional;
 import jp.co.soramitsu.sora.bca.domain.entities.User;
 import jp.co.soramitsu.sora.bca.domain.repositories.UserRepository;
-import jp.co.soramitsu.sora.bca.exceptions.IncorrectCredentialsException;
+import jp.co.soramitsu.sora.bca.exceptions.WrongPasswordException;
 import jp.co.soramitsu.sora.bca.exceptions.NoSuchUserException;
 import lombok.extern.slf4j.Slf4j;
 import lombok.val;
@@ -14,16 +14,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Transactional
 @Service
 @Slf4j
-public class UserServiceImpl implements UserService<User> {
+public class UserAuthServiceImpl implements UserAuthService<User> {
 
   private PasswordEncoder passwordEncoder;
   private UserRepository userRepository;
   private TokenService tokenService;
 
-  public UserServiceImpl(
+  public UserAuthServiceImpl(
       PasswordEncoder passwordEncoder,
       UserRepository userRepository,
       TokenService tokenService
@@ -43,7 +45,7 @@ public class UserServiceImpl implements UserService<User> {
       if (passwordEncoder.matches(password, passFromRepo.get().getPassword())) {
         return tokenService.generateToken(subject);
       } else {
-        throw new IncorrectCredentialsException(username);
+        throw new WrongPasswordException(username);
       }
     } else {
       throw new NoSuchUserException(username);
@@ -53,6 +55,7 @@ public class UserServiceImpl implements UserService<User> {
   @Override
   public Optional<User> findByToken(String token) {
     throwIfNotNull(token);
+
     String subject = tokenService.extractSubject(token);
     val userFromRepo = userRepository.findByUsername(subject);
     if (userFromRepo.isPresent()) {
@@ -65,6 +68,7 @@ public class UserServiceImpl implements UserService<User> {
   @Override
   public void logout(String token) {
     throwIfNotNull(token);
+
     tokenService.blacklist(token);
   }
 

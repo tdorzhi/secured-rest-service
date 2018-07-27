@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/postgres
+  jpa:
+    generate-ddl: true
+    hibernate:
+      ddl-auto: create
+auth:
+  jwt:
+    secret: MYHMACSECRETKEY
+logging:
+  level:
+    org.springframework.security: DEBUG
+
